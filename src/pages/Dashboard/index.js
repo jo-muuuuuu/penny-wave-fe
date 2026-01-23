@@ -73,9 +73,14 @@ const Dashboard = () => {
     .sort((a, b) => new Date(b.date) - new Date(a.date))
     .slice(0, 5);
 
+  const savingsPlanList = useSelector((state) => state.savingsPlan.savingsPlanList);
+
   const depositList = useSelector((state) => state.deposit.depositList);
   const recentDeposits = [...depositList]
-    .filter((deposit) => deposit.status === "pending")
+    .filter((deposit) => {
+      const plan = savingsPlanList.find((plan) => plan.id === deposit.plan_id);
+      return deposit.status === "pending" && plan.status !== "cancelled";
+    })
     .sort((a, b) => new Date(a.date) - new Date(b.date))
     .slice(0, 5);
 
