@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Layout, Button, Row, Col, Card } from "antd";
 import { LinkedinFilled, GithubFilled, MailFilled } from "@ant-design/icons";
 
@@ -16,78 +16,111 @@ const { Header, Footer } = Layout;
 const Landing = () => {
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const header = document.querySelector(".land-header");
+    let lastScrollY = window.scrollY;
+
+    const onScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY <= 0) {
+        header.classList.remove("hidden", "visible");
+        header.classList.add("top");
+        lastScrollY = currentScrollY;
+        return;
+      }
+
+      if (currentScrollY > lastScrollY && currentScrollY > 80) {
+        header.classList.remove("top", "visible");
+        header.classList.add("hidden");
+      }
+
+      if (currentScrollY < lastScrollY) {
+        header.classList.remove("hidden", "top");
+        header.classList.add("visible");
+      }
+
+      lastScrollY = currentScrollY;
+    };
+
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <Layout>
-      <Header className="land-header" style={{ backgroundColor: "#1677ff" }}>
-        <div className="land-header-item"></div>
+      <div className="land-hero-wrapper">
+        <Header className="land-header">
+          <div className="land-header-item"></div>
 
-        <div className="land-header-item">
-          <img
-            src={PennyWaveFontWhite}
-            style={{ marginTop: "1rem", height: "3rem" }}
-            alt="Penny Wave"
-          />
+          <div className="land-header-item">
+            <img
+              src={PennyWaveFontWhite}
+              style={{ marginTop: "1rem", height: "3rem" }}
+              alt="Penny Wave"
+            />
+          </div>
+
+          <div className="land-header-item">
+            <Button
+              type="primary"
+              className="land-header-btn"
+              style={{ backgroundColor: "#191970" }}
+              onClick={() => {
+                navigate("/login");
+              }}
+            >
+              SIGN IN
+            </Button>
+
+            <Button
+              type="primary"
+              className="land-header-btn"
+              style={{
+                border: "1.5px solid #ffffff",
+                color: "#ffffff",
+              }}
+              onClick={() => {
+                navigate("/register");
+              }}
+            >
+              SIGN UP
+            </Button>
+          </div>
+        </Header>
+
+        <div className="land-banner">
+          <div style={{ textAlign: "center" }}>
+            <h1>Your Smart Solution for Personal Finance</h1>
+
+            <p>
+              Track expenses, manage budgets, and gain insights into your spending with
+              our powerful and easy-to-use Bookkeeping App.
+            </p>
+
+            <iframe
+              className="land-video"
+              width="640"
+              height="360"
+              src="https://www.youtube.com/embed/-0Kt80Snxmk?si=EarQk1my27b1SpUo"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
+          </div>
         </div>
 
-        <div className="land-header-item">
-          <span
-            style={{
-              marginRight: "1rem",
-            }}
-            onClick={() => {
-              navigate("/login");
-            }}
+        <div className="land-banner-arc" style={{ marginTop: "-1px" }}>
+          <svg
+            viewBox="0 0 1440 120"
+            preserveAspectRatio="none"
+            style={{ display: "block", width: "100%", height: "120px" }}
           >
-            Sign In
-          </span>
-
-          <span style={{ marginRight: "1rem", cursor: "default" }}>|</span>
-
-          <span
-            onClick={() => {
-              navigate("/register");
-            }}
-          >
-            Sign Up
-          </span>
+            <path d="M0,0 C240,120 1200,120 1440,0 L1440,120 L0,120 Z" fill="#f5f5f5" />
+          </svg>
         </div>
-      </Header>
-
-      <div className="land-banner">
-        <div style={{ textAlign: "center" }}>
-          <h1>Your Smart Solution for Personal Finance</h1>
-
-          <p>
-            Track expenses, manage budgets, and gain insights into your spending with our
-            powerful and easy-to-use Bookkeeping App.
-          </p>
-
-          <iframe
-            className="land-video"
-            width="640"
-            height="360"
-            src="https://www.youtube.com/embed/-0Kt80Snxmk?si=EarQk1my27b1SpUo"
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen
-          ></iframe>
-        </div>
-      </div>
-      {/* <Button
-            type="primary"
-            size="large"
-            style={{ backgroundColor: "navy", marginTop: "2.5rem" }}
-            href="https://github.com/jo-muuuuuu/personal-finance-app-fe"
-            target="_blank"
-          >
-            INTRODUCTION
-          </Button> */}
-
-      <div className="land-banner-arc">
-        <div className="land-banner-arc-top"></div>
-        <div className="land-banner-arc-bot"></div>
       </div>
 
       <div className="land-features">
@@ -193,7 +226,7 @@ const Landing = () => {
             <div className="land-footer-contact-item">
               <LinkedinFilled />
               <a
-                href="https://www.linkedin.com/in/zicheng-mu/"
+                href="https://www.linkedin.com/in/johnny-mu/"
                 target="_blank"
                 rel="noreferrer"
               >
