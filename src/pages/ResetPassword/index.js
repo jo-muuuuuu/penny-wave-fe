@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
-import { Card, Button, Form, Input } from "antd";
+import { Card, Button, Form, Input, Divider } from "antd";
+import PennyWaveFontBlue from "../../assets/imgs/penny-wave-font-blue.png";
 
 import { useDispatch } from "react-redux";
 import {
@@ -52,8 +53,20 @@ const ResetPassword = () => {
   };
 
   return validToken ? (
-    <div className="login-container">
-      <Card title="Reset Password" variant="borderless" style={{ width: 600 }}>
+    <div
+      className="login-container"
+      style={{
+        background: "linear-gradient(180deg, #1677ff 0%, #4da3ff 25%, #f5f5f5 100%)",
+      }}
+    >
+      <Card variant="borderless" style={{ width: 600 }}>
+        <div style={{ textAlign: "center" }}>
+          <img src={PennyWaveFontBlue} style={{ height: "4rem" }} />
+        </div>
+        <Divider />
+        <div style={{ textAlign: "center", color: "#1677ff", marginBottom: "1.5rem" }}>
+          <h2>Reset Password</h2>
+        </div>
         <Form
           {...formItemLayout}
           form={form}
@@ -92,7 +105,7 @@ const ResetPassword = () => {
                     return Promise.resolve();
                   }
                   return Promise.reject(
-                    new Error("The new password that you entered do not match!")
+                    new Error("The new password that you entered do not match!"),
                   );
                 },
               }),

@@ -67,7 +67,12 @@ const Register = () => {
   };
 
   return (
-    <div className="login-container">
+    <div
+      className="login-container"
+      style={{
+        background: "linear-gradient(180deg, #1677ff 0%, #4da3ff 25%, #f5f5f5 100%)",
+      }}
+    >
       <Card variant="borderless" style={{ width: "600px" }}>
         <div style={{ textAlign: "center" }}>
           <img src={PennyWaveFontBlue} style={{ height: "4rem" }} />
@@ -136,7 +141,7 @@ const Register = () => {
                     return Promise.resolve();
                   }
                   return Promise.reject(
-                    new Error("The new password that you entered do not match!")
+                    new Error("The new password that you entered do not match!"),
                   );
                 },
               }),
@@ -180,7 +185,7 @@ const Register = () => {
 
           <Form.Item {...buttonLayout}>
             <Button type="primary" htmlType="submit">
-              Register
+              SIGN UP
             </Button>
           </Form.Item>
         </Form>

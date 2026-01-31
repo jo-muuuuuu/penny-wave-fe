@@ -28,7 +28,12 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
+    <div
+      className="login-container"
+      style={{
+        background: "linear-gradient(180deg, #1677ff 0%, #4da3ff 25%, #f5f5f5 100%)",
+      }}
+    >
       <Card className="login-card" variant="borderless" style={{ width: 500 }}>
         <div style={{ textAlign: "center" }}>
           <img
@@ -68,9 +73,9 @@ const Login = () => {
 
           <Form.Item>
             <Button block type="primary" htmlType="submit">
-              Log in
+              SIGN IN
             </Button>
-            or <a onClick={registerNavigate}>Register now!</a>
+            or <a onClick={registerNavigate}>Sign Up now!</a>
           </Form.Item>
         </Form>
 
