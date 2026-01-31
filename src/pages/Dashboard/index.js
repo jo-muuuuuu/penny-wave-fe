@@ -18,6 +18,7 @@ import NoSignalImg from "../../assets/imgs/no-signal.png";
 import BannedImg from "../../assets/imgs/banned.png";
 import NoDataImg from "../../assets/imgs/no-data.png";
 import LightBulbImg from "../../assets/imgs/lightbulb.png";
+import { fetchSavingsPlans } from "../../store/reducers/savingsPlanThunk";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -79,7 +80,7 @@ const Dashboard = () => {
   const recentDeposits = [...depositList]
     .filter((deposit) => {
       const plan = savingsPlanList.find((plan) => plan.id === deposit.plan_id);
-      return deposit.status === "pending" && plan.status !== "cancelled";
+      return deposit.status === "pending" && plan?.status === "active";
     })
     .sort((a, b) => new Date(a.date) - new Date(b.date))
     .slice(0, 5);
@@ -111,7 +112,10 @@ const Dashboard = () => {
       .reduce((sum) => (sum += 1), 0);
 
     const pending = depositList
-      .filter((deposit) => deposit.status === "pending")
+      .filter((deposit) => {
+        const plan = savingsPlanList.find((plan) => plan.id === deposit.plan_id);
+        return deposit.status === "pending" && plan?.status === "active";
+      })
       .reduce((sum) => (sum += 1), 0);
 
     // console.log(pending, completed);
@@ -133,6 +137,7 @@ const Dashboard = () => {
   useEffect(() => {
     dispatch(fetchAccountBooks());
     dispatch(fetchTransactions());
+    dispatch(fetchSavingsPlans());
     dispatch(fetchDeposits());
   }, [dispatch]);
 
