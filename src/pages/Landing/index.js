@@ -212,7 +212,17 @@ const Landing = () => {
       </Card>
 
       <Footer className="land-footer">
-        <div className="land-footer-arc-top"></div>
+        <div className="land-footer-arc">
+          <svg
+            viewBox="0 0 1440 120"
+            preserveAspectRatio="none"
+            style={{ display: "block", width: "100%", height: "120px" }}
+          >
+            <path d="M0,120 C240,0 1200,0 1440,120 L1440,0 L0,0 Z" fill="#f5f5f5" />
+          </svg>
+        </div>
+
+        {/* <div className="land-footer-arc-top"></div> */}
 
         <div className="land-footer-arc-bot">
           <h2>Contact Me</h2>

@@ -122,17 +122,19 @@
 
 .land-footer {
   padding: 0;
+
+  background: linear-gradient(180deg, #f5f5f5 0%, #4da3ff 45%, #1677ff 100%);
+  position: relative;
 }
 
-.land-footer-arc-top {
-  background-color: #1677ff;
-  height: 96px;
-
-  clip-path: ellipse(55% 105% at 50% 105%);
+.land-footer-arc {
+  position: relative;
+  overflow: hidden;
+  margin-top: -1px;
 }
 
 .land-footer-arc-bot {
-  background-color: #1677ff;
+  background: transparent;
   color: #ffffff;
 
   position: relative;
@@ -145,6 +147,8 @@
   font-weight: bold;
   font-size: 1.5rem;
   margin-top: 0;
+
+  cursor: default;
 }
 
 .land-footer-arc-bot .anticon {
@@ -181,4 +185,6 @@
 .land-footer-copy {
   text-align: center;
   height: 60px;
+
+  cursor: default;
 }

@@ -20,31 +20,15 @@ const ForgotPassword = () => {
   const onFinish = (values) => {
     // console.log("Received values of form: ", values);
     dispatch(userForgotPassword(values, navigate));
-
-    // axiosInstance
-    //   .post(`/forgot-password`, values)
-    //   .then((response) => {
-    //     if (response.status === 200) {
-    //       antdSuccess("Please check your email for password reset link!");
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     if (error.response) {
-    //       console.error("Error response:", error.response.data);
-
-    //       if (error.response.status === 401) {
-    //         antdError("Invalid email or password");
-    //       } else if (error.response.status === 500) {
-    //         antdError("Server error, please try again later");
-    //       }
-    //     } else {
-    //       antdError("An error occurred: " + error.message);
-    //     }
-    //   });
   };
 
   return (
-    <div className="login-container">
+    <div
+      className="login-container"
+      style={{
+        background: "linear-gradient(180deg, #1677ff 0%, #4da3ff 25%, #f5f5f5 100%)",
+      }}
+    >
       <Card className="login-card" variant="borderless" style={{ width: 500 }}>
         <div style={{ textAlign: "center" }}>
           <img src={PennyWaveFontBlue} style={{ height: "4rem" }} />
