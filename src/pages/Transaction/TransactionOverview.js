@@ -19,7 +19,7 @@ const TransactionOverview = () => {
   const transactionList = useSelector((state) => state.transaction.transactionList);
 
   const newTransactionNav = () => {
-    return navigate("/transactions/new");
+    return navigate("/transaction/new");
   };
 
   const newAccBookNav = () => {

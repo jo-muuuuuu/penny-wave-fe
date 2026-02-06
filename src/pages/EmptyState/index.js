@@ -37,7 +37,7 @@ const EmptyState = ({
     //     <p
     //       className="dashboard-dropdown-item"
     //       onClick={() => {
-    //         navigate("/transactions/new");
+    //         navigate("/transaction/new");
     //       }}
     //     >
     //       <PlusCircleOutlined /> New Transaction

@@ -13,10 +13,10 @@ const ViewAccountBook = () => {
   const navigate = useNavigate();
 
   const accountBookSelected = useSelector(
-    (state) => state.accountBook.accountBookSelected
+    (state) => state.accountBook.accountBookSelected,
   );
   const transactionList = useSelector(
-    (state) => state.transaction.transactionList
+    (state) => state.transaction.transactionList,
   ).filter((transaction) => {
     return transaction.account_book_id === accountBookSelected.id;
     // console.log(transaction);

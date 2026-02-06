@@ -22,6 +22,7 @@ import ViewSavingsPlan from "../pages/SavingsPlan/ViewSavingsPlan";
 import DepositList from "../components/DepositList";
 import GitHubCallback from "../components/ThirdPartyLogin/GitHubCallback";
 import NotFound from "../pages/NotFound";
+import BillOverview from "../pages/Bill/BillOverview";
 
 const router = createBrowserRouter([
   {
@@ -44,7 +45,7 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: "transactions",
+        path: "transaction",
         children: [
           { index: true, element: <Navigate to="overview" replace /> },
           { path: "overview", element: <TransactionOverview /> },
@@ -62,6 +63,13 @@ const router = createBrowserRouter([
           { path: "edit/:name", element: <EditSavingsPlan /> },
           { path: "view/:id", element: <ViewSavingsPlan /> },
           { path: "deposit/:id", element: <DepositList /> },
+        ],
+      },
+      {
+        path: "bill",
+        children: [
+          { index: true, element: <Navigate to="overview" replace /> },
+          { path: "overview", element: <BillOverview /> },
         ],
       },
       { path: "/profile", element: <Profile /> },

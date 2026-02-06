@@ -18,13 +18,13 @@ const EditTransaction = () => {
   const dispatch = useDispatch();
 
   const transactionSelected = useSelector(
-    (state) => state.transaction.transactionSelected
+    (state) => state.transaction.transactionSelected,
   );
 
   // console.log("accountBookSelected", accountBookSelected);
 
   const onCancel = () => {
-    navigate("/transactions/overview");
+    navigate("/transaction/overview");
   };
 
   const onFinish = (values) => {
@@ -32,13 +32,13 @@ const EditTransaction = () => {
     // console.log("Received values of form: ", values);
 
     dispatch(editTransaction(values, transactionSelected.id));
-    navigate("/transactions/overview");
+    navigate("/transaction/overview");
   };
 
   const onDelete = () => {
     dispatch(deleteTransaction(transactionSelected.id));
 
-    navigate("/transactions/overview");
+    navigate("/transaction/overview");
   };
 
   useEffect(() => {

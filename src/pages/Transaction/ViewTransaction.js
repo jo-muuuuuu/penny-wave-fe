@@ -15,16 +15,16 @@ const ViewTransaction = () => {
   const dispatch = useDispatch();
 
   const transactionSelected = useSelector(
-    (state) => state.transaction.transactionSelected
+    (state) => state.transaction.transactionSelected,
   );
 
   const onCancel = () => {
-    navigate("/transactions/overview");
+    navigate("/transaction/overview");
   };
 
   const onDelete = () => {
     dispatch(deleteTransaction(transactionSelected.id));
-    navigate("/transactions/overview");
+    navigate("/transaction/overview");
   };
 
   useEffect(() => {

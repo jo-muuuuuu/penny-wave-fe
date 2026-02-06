@@ -44,7 +44,7 @@ const Dashboard = () => {
         <p
           className="dashboard-dropdown-item"
           onClick={() => {
-            navigate("/transactions/new");
+            navigate("/transaction/new");
           }}
         >
           <PlusCircleOutlined /> New Transaction
@@ -123,7 +123,7 @@ const Dashboard = () => {
   }, [recentDeposits]);
 
   const newTransactionNav = () => {
-    return navigate("/transactions/new");
+    return navigate("/transaction/new");
   };
 
   const newAccBookNav = () => {

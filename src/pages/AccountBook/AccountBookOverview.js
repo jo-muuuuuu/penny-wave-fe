@@ -50,7 +50,7 @@ const AccountBookOverview = () => {
   const newTransactionNav = (item) => {
     return () => {
       dispatch(setAccountBookSelected(item));
-      navigate("/transactions/new");
+      navigate("/transaction/new");
     };
   };
 

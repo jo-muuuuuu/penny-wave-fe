@@ -17,11 +17,11 @@ const NewTransaction = () => {
     // console.log("Form values:", values);
 
     dispatch(newTransaction(values));
-    navigate("/transactions/overview");
+    navigate("/transaction/overview");
   };
 
   const onCancel = () => {
-    navigate("/transactions/overview");
+    navigate("/transaction/overview");
   };
 
   useEffect(() => {

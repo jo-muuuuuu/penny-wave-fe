@@ -1,8 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-
 import { useNavigate } from "react-router";
-
 import { Button, Space, Table, Row, Col, Divider } from "antd";
 import {
   PlusCircleOutlined,
@@ -34,24 +32,24 @@ const TransactionTable = ({
   const dispatch = useDispatch();
 
   const accountBookSelected = useSelector(
-    (state) => state.accountBook.accountBookSelected
+    (state) => state.accountBook.accountBookSelected,
   );
 
   const newTransactionNav = () => {
-    navigate("/transactions/new");
+    navigate("/transaction/new");
   };
 
   const editTransactionNav = (item) => {
     return () => {
       dispatch(setTransactionSelected(item));
-      navigate(`/transactions/edit/${item.id}`);
+      navigate(`/transaction/edit/${item.id}`);
     };
   };
 
   const viewTransactionNav = (item) => {
     return () => {
       dispatch(setTransactionSelected(item));
-      navigate(`/transactions/view/${item.id}`);
+      navigate(`/transaction/view/${item.id}`);
     };
   };
 
@@ -113,7 +111,7 @@ const TransactionTable = ({
 
       <Table
         dataSource={[...transactionList].sort(
-          (a, b) => new Date(b.date) - new Date(a.date)
+          (a, b) => new Date(b.date) - new Date(a.date),
         )}
         rowClassName={(record) => {
           if (record.type === "expense") return "row-expense";

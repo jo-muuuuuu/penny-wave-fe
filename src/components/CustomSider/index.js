@@ -5,6 +5,7 @@ import {
   BookOutlined,
   DollarOutlined,
   BankOutlined,
+  CreditCardOutlined,
   UserOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
@@ -26,7 +27,7 @@ const siderItems = [
     label: "Account Books",
   },
   {
-    key: "/transactions/overview",
+    key: "/transaction/overview",
     icon: React.createElement(DollarOutlined),
     label: "Transactions",
   },
@@ -34,6 +35,11 @@ const siderItems = [
     key: "/savings-plan/overview",
     icon: React.createElement(BankOutlined),
     label: "Savings Plans",
+  },
+  {
+    key: "/bill/overview",
+    icon: React.createElement(CreditCardOutlined),
+    label: "Bills",
   },
   {
     key: "/profile",
@@ -51,8 +57,8 @@ const CustomSider = () => {
 
     if (currentPath.startsWith("/account-book")) {
       return "/account-book/overview";
-    } else if (currentPath.startsWith("/transactions")) {
-      return "/transactions/overview";
+    } else if (currentPath.startsWith("/transaction")) {
+      return "/transaction/overview";
     } else if (currentPath.startsWith("/savings-plan")) {
       return "/savings-plan/overview";
     } else if (currentPath === "/profile") {
