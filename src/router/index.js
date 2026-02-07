@@ -23,6 +23,9 @@ import DepositList from "../components/DepositList";
 import GitHubCallback from "../components/ThirdPartyLogin/GitHubCallback";
 import NotFound from "../pages/NotFound";
 import BillOverview from "../pages/Bill/BillOverview";
+import NewBill from "../pages/Bill/NewBill";
+import EditBill from "../pages/Bill/EditBill";
+import ViewBill from "../pages/Bill/ViewBill";
 
 const router = createBrowserRouter([
   {
@@ -70,6 +73,9 @@ const router = createBrowserRouter([
         children: [
           { index: true, element: <Navigate to="overview" replace /> },
           { path: "overview", element: <BillOverview /> },
+          { path: "new", element: <NewBill /> },
+          { path: "edit/:id", element: <EditBill /> },
+          { path: "view/:id", element: <ViewBill /> },
         ],
       },
       { path: "/profile", element: <Profile /> },

@@ -61,6 +61,8 @@ const CustomSider = () => {
       return "/transaction/overview";
     } else if (currentPath.startsWith("/savings-plan")) {
       return "/savings-plan/overview";
+    } else if (currentPath.startsWith("/bill")) {
+      return "/bill/overview";
     } else if (currentPath === "/profile") {
       return "/profile";
     }

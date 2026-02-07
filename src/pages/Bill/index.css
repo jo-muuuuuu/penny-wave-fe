@@ -1,0 +1,20 @@
+.calendar-card {
+  margin-top: 20px;
+  background-color: #fafafa;
+}
+
+.fc-prev-button,
+.fc-next-button,
+.fc-today-button {
+  background-color: #1677ff !important;
+  border: none !important;
+}
+
+.fc-today-button {
+  text-transform: capitalize !important;
+}
+
+.fc .fc-button:focus,
+.fc .fc-button:active {
+  box-shadow: none !important;
+}
