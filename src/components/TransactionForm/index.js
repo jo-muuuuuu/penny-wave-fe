@@ -6,40 +6,9 @@ import { CheckOutlined, LeftOutlined } from "@ant-design/icons";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import * as Icons from "../../assets";
 import CategoryGrid from "../CategoryGrid";
 import DeleteButton from "../DeleteButton";
 import { fetchAccountBooks } from "../../store/reducers/accountBookThunk";
-
-const expenses = [
-  { id: 1, name: "Grocery", icon: <Icons.Grocery /> },
-  { id: 2, name: "Public Transport", icon: <Icons.PublicTransport /> },
-  { id: 3, name: "Health", icon: <Icons.Health /> },
-  { id: 4, name: "Taxi", icon: <Icons.Taxi /> },
-  { id: 5, name: "Clothing", icon: <Icons.Clothing /> },
-  { id: 6, name: "Gift", icon: <Icons.Gift /> },
-  { id: 7, name: "Digital Product", icon: <Icons.Digital /> },
-  { id: 8, name: "Shopping", icon: <Icons.Shopping /> },
-  { id: 9, name: "Dining", icon: <Icons.Dining /> },
-  { id: 10, name: "Dessert", icon: <Icons.Dessert /> },
-  { id: 11, name: "Bar", icon: <Icons.Bar /> },
-  { id: 12, name: "Pet", icon: <Icons.Pet /> },
-  { id: 13, name: "Baby Care", icon: <Icons.Babycare /> },
-  { id: 14, name: "Gaming", icon: <Icons.Gaming /> },
-  { id: 15, name: "Gym", icon: <Icons.Gym /> },
-  { id: 16, name: "Subscription", icon: <Icons.Subscription /> },
-  { id: 17, name: "Travel", icon: <Icons.Travel /> },
-  { id: 18, name: "Transport", icon: <Icons.Transport /> },
-  { id: 19, name: "Hotel", icon: <Icons.Hotel /> },
-  { id: 20, name: "Ticket", icon: <Icons.Ticket /> },
-];
-
-const incomes = [
-  { id: 21, name: "Salary", icon: <Icons.Salary /> },
-  { id: 22, name: "Bonus", icon: <Icons.Bonus /> },
-  { id: 23, name: "Overtime", icon: <Icons.Overtime /> },
-  { id: 24, name: "Financial Management Income", icon: <Icons.Financial /> },
-];
 
 const TransactionForm = ({
   title,
@@ -58,7 +27,7 @@ const TransactionForm = ({
 
   const accountBookList = useSelector((state) => state.accountBook.accountBookList);
   const accountBookSelected = useSelector(
-    (state) => state.accountBook.accountBookSelected
+    (state) => state.accountBook.accountBookSelected,
   );
 
   // console.log(initialValues);
@@ -191,8 +160,6 @@ const TransactionForm = ({
         </Form.Item>
 
         <CategoryGrid
-          expenses={expenses}
-          incomes={incomes}
           onSelect={handleCategorySelect}
           type={type}
           selected={initialValues.category}
