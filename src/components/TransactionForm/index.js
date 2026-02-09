@@ -6,7 +6,7 @@ import { CheckOutlined, LeftOutlined } from "@ant-design/icons";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import CategoryGrid from "../CategoryGrid";
+import TransactionCategoryGrid from "../CategoryGrid/transactionCategories";
 import DeleteButton from "../DeleteButton";
 import { fetchAccountBooks } from "../../store/reducers/accountBookThunk";
 
@@ -159,7 +159,7 @@ const TransactionForm = ({
           </Radio.Group>
         </Form.Item>
 
-        <CategoryGrid
+        <TransactionCategoryGrid
           onSelect={handleCategorySelect}
           type={type}
           selected={initialValues.category}

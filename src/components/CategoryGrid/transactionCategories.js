@@ -42,7 +42,7 @@ const incomes = [
   { id: 32, name: "Gift Money", icon: <Icons.GiftMoney /> },
 ];
 
-const CategoryGrid = ({ onSelect, type, selected }) => {
+const TransactionCategoryGrid = ({ onSelect, type, selected }) => {
   const [selectedCategory, setSelectedCategory] = useState(selected);
   // console.log(select);
 
@@ -104,4 +104,4 @@ const CategoryGrid = ({ onSelect, type, selected }) => {
   );
 };
 
-export default CategoryGrid;
+export default TransactionCategoryGrid;

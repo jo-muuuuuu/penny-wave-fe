@@ -1,6 +1,8 @@
+import React, { useState } from "react";
 import { Button, Row, Col, Divider, Form, Input, DatePicker, Checkbox } from "antd";
 import { CheckOutlined, LeftOutlined } from "@ant-design/icons";
 import DeleteButton from "../DeleteButton";
+import BillCategoryGrid from "../CategoryGrid/billCategories";
 
 const BillForm = ({
   onCancel,
@@ -10,6 +12,13 @@ const BillForm = ({
   initialValues = {},
   divider,
 }) => {
+  const [categorySelected, setCategorySelected] = useState(null);
+
+  const handleCategorySelect = (name) => {
+    // console.log("Selected category name:", name);
+    setCategorySelected(name);
+  };
+
   return (
     <div>
       <Row className="view-transaction-header">
@@ -90,6 +99,11 @@ const BillForm = ({
         >
           <DatePicker format="YYYY-MM-DD" />
         </Form.Item>
+
+        <BillCategoryGrid
+          onSelect={handleCategorySelect}
+          selected={initialValues.category}
+        />
 
         <Form.Item
           wrapperCol={{

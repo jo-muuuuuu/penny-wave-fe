@@ -1,0 +1,14 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+	<style>
+		.s0 { fill: #fdecea } 
+		.s1 { fill: #ff8a3d } 
+		.s2 { fill: #ffffff } 
+	</style>
+	<path fill-rule="evenodd" class="s0" d="m128 248c-66.36 0-120-53.64-120-120 0-66.36 53.64-120 120-120 66.36 0 120 53.64 120 120 0 66.36-53.64 120-120 120z"/>
+	<path fill-rule="evenodd" class="s1" d="m72 80h112c8.84 0 16 7.16 16 16v64c0 8.84-7.16 16-16 16h-112c-8.84 0-16-7.16-16-16v-64c0-8.84 7.16-16 16-16z"/>
+	<path fill-rule="evenodd" class="s1" d="m68 80h120c6.63 0 12 5.37 12 12 0 6.63-5.37 12-12 12h-120c-6.63 0-12-5.37-12-12 0-6.63 5.37-12 12-12z"/>
+	<path fill-rule="evenodd" class="s2" d="m115 136h6c1.66 0 3 1.34 3 3v6c0 1.66-1.34 3-3 3h-6c-1.66 0-3-1.34-3-3v-6c0-1.66 1.34-3 3-3z"/>
+	<path fill-rule="evenodd" class="s2" d="m135 136h6c1.66 0 3 1.34 3 3v6c0 1.66-1.34 3-3 3h-6c-1.66 0-3-1.34-3-3v-6c0-1.66 1.34-3 3-3z"/>
+	<path fill-rule="evenodd" class="s2" d="m155 136h6c1.66 0 3 1.34 3 3v6c0 1.66-1.34 3-3 3h-6c-1.66 0-3-1.34-3-3v-6c0-1.66 1.34-3 3-3z"/>
+	<path id="Shape 1" fill-rule="evenodd" class="s2" d="m200 101v12h-144v-12z"/>
+</svg>
