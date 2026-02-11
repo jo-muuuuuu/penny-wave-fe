@@ -1,8 +1,28 @@
-import React, { useState } from "react";
-import { Button, Row, Col, Divider, Form, Input, DatePicker, Checkbox } from "antd";
+import React, { useState, useEffect } from "react";
+import {
+  Button,
+  Row,
+  Col,
+  Divider,
+  Form,
+  Input,
+  DatePicker,
+  Checkbox,
+  Select,
+} from "antd";
 import { CheckOutlined, LeftOutlined } from "@ant-design/icons";
 import DeleteButton from "../DeleteButton";
 import BillCategoryGrid from "../CategoryGrid/billCategories";
+
+const { Option } = Select;
+
+const periodOptions = [
+  { label: "Week", value: "week" },
+  { label: "Fortnight", value: "fortnight" },
+  { label: "Month", value: "month" },
+  { label: "Quarter", value: "quarter" },
+  { label: "Year", value: "year" },
+];
 
 const BillForm = ({
   onCancel,
@@ -12,12 +32,27 @@ const BillForm = ({
   initialValues = {},
   divider,
 }) => {
-  const [categorySelected, setCategorySelected] = useState(null);
+  const [categorySelected, setCategorySelected] = useState(
+    initialValues.category ?? null,
+  );
+
+  const [form] = Form.useForm();
+  const isRecurring = Form.useWatch("recurring", form);
 
   const handleCategorySelect = (name) => {
     // console.log("Selected category name:", name);
     setCategorySelected(name);
   };
+
+  const handleFinish = (values) => {
+    onFinish({ ...values, category: categorySelected });
+  };
+
+  useEffect(() => {
+    if (!isRecurring) {
+      form.setFieldsValue({ period: undefined });
+    }
+  }, [isRecurring, form]);
 
   return (
     <div>
@@ -34,11 +69,7 @@ const BillForm = ({
 
         <Col span={8}>
           {onDelete && (
-            <DeleteButton
-              type={"Account Book"}
-              name={initialValues.id}
-              onDelete={onDelete}
-            />
+            <DeleteButton type={"Bill"} name={initialValues.id} onDelete={onDelete} />
           )}
         </Col>
       </Row>
@@ -46,6 +77,7 @@ const BillForm = ({
       {divider && <Divider />}
 
       <Form
+        form={form}
         labelCol={{
           span: 4,
         }}
@@ -54,7 +86,7 @@ const BillForm = ({
         }}
         className="new-form"
         name="bill-form"
-        onFinish={onFinish}
+        onFinish={handleFinish}
         initialValues={initialValues}
       >
         <Form.Item
@@ -83,10 +115,6 @@ const BillForm = ({
           <Input />
         </Form.Item>
 
-        <Form.Item label="Type" name="type">
-          <Checkbox value="recur"> Recurring </Checkbox>
-        </Form.Item>
-
         <Form.Item
           label="Due Date"
           name="date"
@@ -99,6 +127,36 @@ const BillForm = ({
         >
           <DatePicker format="YYYY-MM-DD" />
         </Form.Item>
+
+        <Form.Item
+          label="Type"
+          name="recurring"
+          valuePropName="checked"
+          tooltip="If enabled, bills for the next period will be automatically generated on the same day each period."
+        >
+          <Checkbox> Recurring </Checkbox>
+        </Form.Item>
+
+        {isRecurring && (
+          <>
+            <Form.Item
+              label="Period"
+              name="period"
+              rules={[{ required: true, message: "Please select a period!" }]}
+            >
+              <Select placeholder="Select savings period">
+                {periodOptions.map((option) => (
+                  <Option key={option.value} value={option.value}>
+                    {option.label}
+                  </Option>
+                ))}
+              </Select>
+            </Form.Item>
+            <Form.Item label="Direct Debit" name="directDebit" valuePropName="checked">
+              <Checkbox> Direct Debit </Checkbox>
+            </Form.Item>
+          </>
+        )}
 
         <BillCategoryGrid
           onSelect={handleCategorySelect}

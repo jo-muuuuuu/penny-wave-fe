@@ -18,3 +18,43 @@
 .fc .fc-button:active {
   box-shadow: none !important;
 }
+
+.fc-daygrid-event {
+  border: none !important;
+  margin: 1px 4px !important;
+}
+
+.bill-event {
+  display: inline-flex;
+  border-radius: 4px;
+  overflow: hidden;
+  font-size: 12px;
+  width: 100%;
+
+  background-color: rgba(22, 119, 225, 0.2);
+}
+
+.bill-status.pending {
+  width: 15%;
+  background: rgba(255, 255, 0, 0.5);
+}
+
+.bill-status.completed {
+  width: 15%;
+  background: rgba(0, 255, 0, 0.5);
+}
+
+.bill-name {
+  padding: 2px 6px;
+  width: 75%;
+  text-align: center;
+  text-transform: uppercase;
+
+  color: #000000;
+  font-weight: bold;
+}
+
+.bill-amount {
+  color: #000000;
+  padding: 2px 6px;
+}

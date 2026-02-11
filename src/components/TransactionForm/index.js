@@ -19,7 +19,9 @@ const TransactionForm = ({
   initialValues = { type: "expense" },
 }) => {
   const [type, setType] = useState("");
-  const [categorySelected, setCategorySelected] = useState(null);
+  const [categorySelected, setCategorySelected] = useState(
+    initialValues.category ?? null,
+  );
 
   const [form] = Form.useForm();
 

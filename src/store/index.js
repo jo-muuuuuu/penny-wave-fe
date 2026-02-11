@@ -5,7 +5,8 @@ import persistedUserInfoReducer from "./reducers/userInfoSlice";
 import persistedAccountBookReducer from "./reducers/accountBookSlice";
 import persistedTransactionReducer from "./reducers/transactionSlice";
 import persistedSavingsPlanReducer from "./reducers/savingsPlanSlice";
-import persustedDepositReducer from "./reducers/depositSlicer";
+import persistedDepositReducer from "./reducers/depositSlicer";
+import persistedBillReducer from "./reducers/billSlice";
 
 export const store = configureStore({
   reducer: {
@@ -13,7 +14,8 @@ export const store = configureStore({
     accountBook: persistedAccountBookReducer,
     transaction: persistedTransactionReducer,
     savingsPlan: persistedSavingsPlanReducer,
-    deposit: persustedDepositReducer,
+    deposit: persistedDepositReducer,
+    bill: persistedBillReducer,
   },
 
   middleware: (getDefaultMiddleware) =>

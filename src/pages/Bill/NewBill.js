@@ -3,10 +3,16 @@ import BillForm from "../../components/BillForm";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 
+import { newBill } from "../../store/reducers/billThunk";
+import { useDispatch } from "react-redux";
+
 const NewBill = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const onFinish = (values) => {
+    values = { ...values };
+    dispatch(newBill(values));
     navigate("/bill/overview");
   };
 
