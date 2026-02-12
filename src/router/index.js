@@ -22,10 +22,10 @@ import ViewSavingsPlan from "../pages/SavingsPlan/ViewSavingsPlan";
 import DepositList from "../components/DepositList";
 import GitHubCallback from "../components/ThirdPartyLogin/GitHubCallback";
 import NotFound from "../pages/NotFound";
-import BillOverview from "../pages/Bill/BillOverview";
-import NewBill from "../pages/Bill/NewBill";
-import EditBill from "../pages/Bill/EditBill";
-import ViewBill from "../pages/Bill/ViewBill";
+import BillOverview from "../pages/Bill/BillOverview.tsx";
+import NewBill from "../pages/Bill/NewBill.tsx";
+import EditBill from "../pages/Bill/EditBill.tsx";
+import ViewBill from "../pages/Bill/ViewBill.tsx";
 
 const router = createBrowserRouter([
   {

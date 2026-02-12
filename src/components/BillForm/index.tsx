@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   Button,
   Row,
@@ -13,6 +13,7 @@ import {
 import { CheckOutlined, LeftOutlined } from "@ant-design/icons";
 import DeleteButton from "../DeleteButton";
 import BillCategoryGrid from "../CategoryGrid/billCategories";
+import { Bill, NewBillPayload } from "../../types/bill";
 
 const { Option } = Select;
 
@@ -24,28 +25,37 @@ const periodOptions = [
   { label: "Year", value: "year" },
 ];
 
-const BillForm = ({
-  onCancel,
+interface BillFormProps {
+  title: React.ReactNode;
+  onFinish: (values: NewBillPayload) => void;
+  onCancel: () => void;
+  onDelete?: (id: number) => void;
+  initialValues?: Partial<Bill>;
+  divider?: boolean;
+}
+
+const BillForm: React.FC<BillFormProps> = ({
   title,
+  onCancel,
   onDelete,
   onFinish,
   initialValues = {},
   divider,
 }) => {
-  const [categorySelected, setCategorySelected] = useState(
+  const [categorySelected, setCategorySelected] = useState<string | null>(
     initialValues.category ?? null,
   );
 
-  const [form] = Form.useForm();
-  const isRecurring = Form.useWatch("recurring", form);
+  const [form] = Form.useForm<NewBillPayload>();
+  const isRecurring = Form.useWatch<boolean>("recurring", form);
 
-  const handleCategorySelect = (name) => {
+  const handleCategorySelect = (name: string) => {
     // console.log("Selected category name:", name);
     setCategorySelected(name);
   };
 
-  const handleFinish = (values) => {
-    onFinish({ ...values, category: categorySelected });
+  const handleFinish = (values: NewBillPayload) => {
+    onFinish({ ...values, category: categorySelected! });
   };
 
   useEffect(() => {
@@ -158,10 +168,7 @@ const BillForm = ({
           </>
         )}
 
-        <BillCategoryGrid
-          onSelect={handleCategorySelect}
-          selected={initialValues.category}
-        />
+        <BillCategoryGrid onSelect={handleCategorySelect} selected={categorySelected} />
 
         <Form.Item
           wrapperCol={{

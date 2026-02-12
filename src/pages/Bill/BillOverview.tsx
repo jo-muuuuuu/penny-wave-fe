@@ -1,21 +1,23 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Button, Card } from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
+import type { EventInput } from "@fullcalendar/core";
 import "./index.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { fetchBills } from "../../store/reducers/billThunk";
+import { Bill } from "../../types/bill";
 
 const BillOverview = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const billList = useSelector((state) => state.bill.billList);
-  const events = billList.map((bill) => ({
-    id: bill.id,
-    title: bill.name, // 必须有
+  const billList = useAppSelector((state) => state.bill.billList);
+  const events: EventInput[] = billList.map((bill) => ({
+    id: String(bill.id),
+    title: bill.name,
     start: bill.date,
     extendedProps: bill,
   }));
@@ -26,7 +28,7 @@ const BillOverview = () => {
 
   useEffect(() => {
     dispatch(fetchBills());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>
@@ -43,7 +45,7 @@ const BillOverview = () => {
           initialView="dayGridMonth"
           events={events}
           eventContent={(arg) => {
-            const bill = arg.event.extendedProps;
+            const bill = arg.event.extendedProps as Bill;
 
             return (
               <div className="bill-event">
