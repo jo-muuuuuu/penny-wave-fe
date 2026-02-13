@@ -32,3 +32,35 @@ export const newBill = createAsyncThunk<void, NewBillPayload>(
     }
   },
 );
+
+export const markBill = createAsyncThunk<Bill, { id: number; action: string }>(
+  "bill/markBill",
+  async ({ id, action }, { rejectWithValue, dispatch }) => {
+    try {
+      const response = await axiosInstance.patch(`bills/${id}`, { action });
+      antdSuccess("Bill updated!");
+
+      return response.data.bill as Bill;
+    } catch (error) {
+      antdError("Failed to update bill!");
+      console.error("Error updating bill", error);
+      return rejectWithValue(error);
+    }
+  },
+);
+
+export const deleteBill = createAsyncThunk<number, number>(
+  "bill/deleteBill",
+  async (id, { rejectWithValue }) => {
+    try {
+      await axiosInstance.delete(`bills/${id}`);
+      antdSuccess("Bill deleted!");
+
+      return id;
+    } catch (error) {
+      antdError("Failed to delete bill!");
+      console.error("Error deleting bill", error);
+      return rejectWithValue(error);
+    }
+  },
+);

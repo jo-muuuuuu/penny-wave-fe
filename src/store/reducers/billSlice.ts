@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { Bill } from "../../types/bill";
-import { fetchBills } from "./billThunk";
+import { deleteBill, fetchBills, markBill } from "./billThunk";
 
 interface BillState {
   billList: Bill[];
@@ -34,6 +34,16 @@ const billSlice = createSlice({
         state.billList = action.payload;
       })
       .addCase(fetchBills.rejected, () => initialState)
+      .addCase(markBill.fulfilled, (state, action) => {
+        state.billSelected = action.payload;
+      })
+      .addCase(deleteBill.fulfilled, (state, action) => {
+        state.billList = state.billList.filter((bill) => bill.id !== action.payload);
+
+        if (state.billSelected?.id === action.payload) {
+          state.billSelected = null;
+        }
+      })
       .addCase("LOGOUT", () => initialState);
   },
 });

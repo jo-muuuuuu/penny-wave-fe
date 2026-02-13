@@ -21,6 +21,14 @@ const DeleteButton = ({ type, name, onDelete }) => {
             All related deposit records and goals will be permanently removed.
           </p>
         );
+      case "Bill":
+        return (
+          <p>
+            Are you sure to delete Bill: [{name}]?
+            <br />
+            This action cannot be undone.
+          </p>
+        );
       default:
         return "Are you sure to delete this Transaction?";
     }

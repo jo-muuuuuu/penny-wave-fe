@@ -30,7 +30,7 @@ interface BillFormProps {
   onFinish: (values: NewBillPayload) => void;
   onCancel: () => void;
   onDelete?: (id: number) => void;
-  initialValues?: Partial<Bill>;
+  initialValues?: Partial<Bill> | null;
   divider?: boolean;
 }
 
@@ -43,7 +43,7 @@ const BillForm: React.FC<BillFormProps> = ({
   divider,
 }) => {
   const [categorySelected, setCategorySelected] = useState<string | null>(
-    initialValues.category ?? null,
+    initialValues?.category ?? null,
   );
 
   const [form] = Form.useForm<NewBillPayload>();
@@ -64,6 +64,12 @@ const BillForm: React.FC<BillFormProps> = ({
     }
   }, [isRecurring, form]);
 
+  useEffect(() => {
+    if (initialValues) {
+      form.setFieldsValue(initialValues);
+    }
+  }, [initialValues, form]);
+
   return (
     <div>
       <Row className="view-transaction-header">
@@ -79,7 +85,7 @@ const BillForm: React.FC<BillFormProps> = ({
 
         <Col span={8}>
           {onDelete && (
-            <DeleteButton type={"Bill"} name={initialValues.id} onDelete={onDelete} />
+            <DeleteButton type={"Bill"} name={initialValues?.name} onDelete={onDelete} />
           )}
         </Col>
       </Row>
@@ -97,7 +103,7 @@ const BillForm: React.FC<BillFormProps> = ({
         className="new-form"
         name="bill-form"
         onFinish={handleFinish}
-        initialValues={initialValues}
+        initialValues={initialValues ?? undefined}
       >
         <Form.Item
           label="Name"
