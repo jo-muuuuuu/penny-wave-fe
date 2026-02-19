@@ -5,7 +5,9 @@
     "module": "esnext",
     "moduleResolution": "node",
     "noEmit": true,
-    "strict": true
+    "strict": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
   },
   "include": ["src"],
   "exclude": ["node_modules"]

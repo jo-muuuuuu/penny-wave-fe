@@ -1,16 +1,16 @@
-import BillForm from "../../components/BillForm";
+import BillForm from "../../components/BillForm/index";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 
 import { newBill } from "../../store/reducers/billThunk";
 import { useAppDispatch } from "../../store/hooks";
-import { NewBillPayload } from "../../types/bill";
+import { BillFormValues } from "../../types/bill";
 
 const NewBill = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const onFinish = (values: NewBillPayload) => {
+  const onFinish = (values: BillFormValues) => {
     dispatch(newBill(values));
     navigate("/bill/overview");
   };
@@ -18,17 +18,18 @@ const NewBill = () => {
   const onCancel = () => {
     navigate("/bill/overview");
   };
+
   return (
     <BillForm
       title={
-        <p style={{ color: "#1677ff", margin: "0" }}>
+        <h2 style={{ color: "#1677ff", margin: "0" }}>
           <PlusCircleOutlined /> New Bill
-        </p>
+        </h2>
       }
       onFinish={onFinish}
       onCancel={onCancel}
-      onDelete={undefined}
       divider={true}
+      mode="new"
     />
   );
 };

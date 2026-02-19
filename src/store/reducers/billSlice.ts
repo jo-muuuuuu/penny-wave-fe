@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import { Bill } from "../../types/bill";
+import { OnceOffBill } from "../../types/bill";
 import { deleteBill, fetchBills, markBill } from "./billThunk";
 
 interface BillState {
-  billList: Bill[];
-  billSelected: Bill | null;
+  billList: OnceOffBill[];
+  billSelected: OnceOffBill | null;
 }
 
 const initialState: BillState = {
@@ -18,12 +18,12 @@ const billSlice = createSlice({
   name: "bill",
   initialState,
   reducers: {
-    setBillList: (state, action: PayloadAction<Bill[]>) => {
+    setBillList: (state, action: PayloadAction<OnceOffBill[]>) => {
       // console.log("action.payload", action.payload);
       state.billList = action.payload;
     },
 
-    setBillSelected: (state, action: PayloadAction<Bill | null>) => {
+    setBillSelected: (state, action: PayloadAction<OnceOffBill | null>) => {
       // console.log("action.payload", action.payload);
       state.billSelected = action.payload;
     },

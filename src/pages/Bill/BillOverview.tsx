@@ -9,7 +9,7 @@ import type { EventInput } from "@fullcalendar/core";
 import "./index.css";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { fetchBills } from "../../store/reducers/billThunk";
-import { Bill } from "../../types/bill";
+import { OnceOffBill } from "../../types/bill";
 import { setBillSelected } from "../../store/reducers/billSlice";
 
 const BillOverview = () => {
@@ -17,6 +17,7 @@ const BillOverview = () => {
   const navigate = useNavigate();
 
   const billList = useAppSelector((state) => state.bill.billList);
+
   const events: EventInput[] = billList.map((bill) => ({
     id: String(bill.id),
     title: bill.name,
@@ -28,7 +29,7 @@ const BillOverview = () => {
     navigate("/bill/new");
   };
 
-  const viewBillNav = (bill: Bill) => {
+  const viewBillNav = (bill: OnceOffBill) => {
     dispatch(setBillSelected(bill));
     navigate(`/bill/view/${bill.id}`);
   };
@@ -62,7 +63,7 @@ const BillOverview = () => {
           }}
           events={events}
           eventContent={(arg) => {
-            const bill = arg.event.extendedProps as Bill;
+            const bill = arg.event.extendedProps as OnceOffBill;
 
             return (
               <div className="bill-event" onClick={() => viewBillNav(bill)}>
