@@ -10,8 +10,11 @@ import {
   InfoCircleOutlined,
   CalculatorOutlined,
   EyeOutlined,
+  DollarOutlined,
+  StopOutlined,
+  ForwardOutlined,
+  PauseOutlined,
 } from "@ant-design/icons";
-import { setSavingsPlanSelected } from "../../store/reducers/savingsPlanSlice";
 import {
   deleteSavingsPlan,
   editSavingPlansStatus,
@@ -25,7 +28,7 @@ const ViewSavingsPlan = () => {
   const navigate = useNavigate();
 
   const savingsPlanSelected = useSelector(
-    (state) => state.savingsPlan.savingsPlanSelected
+    (state) => state.savingsPlan.savingsPlanSelected,
   );
 
   const onCancel = () => {
@@ -148,7 +151,7 @@ const ViewSavingsPlan = () => {
               navigate(`/savings-plan/deposit/${savingsPlanSelected.id}`);
             }}
           >
-            Deposit
+            <DollarOutlined /> Deposit
           </Button>
         </Col>
 
@@ -159,7 +162,7 @@ const ViewSavingsPlan = () => {
             disabled={savingsPlanSelected.status !== "paused"}
             onClick={handleSavingsPlanActions("resume")}
           >
-            Resume
+            <ForwardOutlined /> Resume
           </Button>
         </Col>
 
@@ -170,7 +173,7 @@ const ViewSavingsPlan = () => {
             disabled={savingsPlanSelected.status !== "active"}
             onClick={handleSavingsPlanActions("pause")}
           >
-            Pause
+            <PauseOutlined /> Pause
           </Button>
         </Col>
 
@@ -182,7 +185,7 @@ const ViewSavingsPlan = () => {
             disabled={savingsPlanSelected.status === "cancelled"}
             onClick={handleSavingsPlanActions("terminate")}
           >
-            Terminate
+            <StopOutlined /> Terminate
           </Button>
         </Col>
       </Row>

@@ -88,7 +88,7 @@ const router = createBrowserRouter([
           { index: true, element: <Navigate to="overview" replace /> },
           { path: "overview", element: <RecurringBillOverview /> },
           { path: "new", element: <NewRecurringBill /> },
-          { path: "edit:/id", element: <EditRecurringBill /> },
+          { path: "edit/:id", element: <EditRecurringBill /> },
           { path: "view/:id", element: <ViewRecurringBill /> },
         ],
       },

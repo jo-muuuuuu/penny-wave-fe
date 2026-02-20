@@ -2,7 +2,11 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { RecurringBill } from "../../types/bill";
-import { deleteRecurringBill, fetchRecurringBills } from "./recurringBillThunk";
+import {
+  changeRecurringBillStatus,
+  deleteRecurringBill,
+  fetchRecurringBills,
+} from "./recurringBillThunk";
 
 interface RecurringBillState {
   recurringBillList: RecurringBill[];
@@ -32,7 +36,9 @@ const recurringBillSlice = createSlice({
         state.recurringBillList = action.payload;
       })
       .addCase(fetchRecurringBills.rejected, () => initialState)
-
+      .addCase(changeRecurringBillStatus.fulfilled, (state, action) => {
+        state.recurringBillSelected = action.payload;
+      })
       .addCase(deleteRecurringBill.fulfilled, (state, action) => {
         state.recurringBillList = state.recurringBillList.filter(
           (bill) => bill.id !== action.payload,

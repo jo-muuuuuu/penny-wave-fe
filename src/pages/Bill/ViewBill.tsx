@@ -70,15 +70,22 @@ const ViewBill = () => {
 
       <div className="transaction-detail-container">
         <Row className="transaction-detail-row" gutter={16}>
-          <Col className="transaction-detail-col" span={8}>
+          <Col className="transaction-detail-col" span={12}>
             <span className="transaction-label">Name</span>
             <span>{billSelected?.name}</span>
           </Col>
-          <Col className="transaction-detail-col" span={8}>
+          <Col className="transaction-detail-col" span={12}>
             <span className="transaction-label">Amount</span>
             <span>{billSelected?.amount}</span>
           </Col>
-          <Col className="transaction-detail-col" span={8}>
+        </Row>
+
+        <Row className="transaction-detail-row" gutter={16}>
+          <Col className="transaction-detail-col" span={12}>
+            <span className="transaction-label">Direct Debit</span>
+            <span>{billSelected?.direct_debit ? "Yes" : "No"}</span>
+          </Col>
+          <Col className="transaction-detail-col" span={12}>
             <span className="transaction-label">Due Date</span>
             <span>{new Date(billSelected?.date || "").toLocaleDateString()}</span>
           </Col>

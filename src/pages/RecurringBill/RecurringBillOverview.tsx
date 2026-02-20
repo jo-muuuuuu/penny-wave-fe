@@ -11,6 +11,7 @@ import {
 import { RecurringBill } from "../../types/bill";
 import DeleteButton from "../../components/DeleteButton";
 import "./index.css";
+import { setRecurringBillSelected } from "../../store/reducers/recurringBillSlice";
 
 const { Column } = Table;
 
@@ -26,12 +27,14 @@ const RecurringBillOverview = () => {
     navigate("/recurring-bill/new");
   };
 
-  const viewRecurringBillNav = () => {
-    return () => {};
+  const viewRecurringBillNav = (recurringBill: RecurringBill) => {
+    dispatch(setRecurringBillSelected(recurringBill));
+    navigate(`/recurring-bill/view/${recurringBill.id}`);
   };
 
-  const editRecurringBillNav = () => {
-    return () => {};
+  const editRecurringBillNav = (recurringBill: RecurringBill) => {
+    dispatch(setRecurringBillSelected(recurringBill));
+    navigate(`/recurring-bill/edit/${recurringBill.id}`);
   };
 
   useEffect(() => {
@@ -85,14 +88,14 @@ const RecurringBillOverview = () => {
           render={(item) => {
             return (
               <Space>
-                <Button type="primary" onClick={viewRecurringBillNav()}>
+                <Button type="primary" onClick={() => viewRecurringBillNav(item)}>
                   <EyeOutlined />
                   View
                 </Button>
                 <Button
                   className="yellow-button"
                   type="primary"
-                  onClick={editRecurringBillNav()}
+                  onClick={() => editRecurringBillNav(item)}
                 >
                   <EditOutlined />
                   Edit

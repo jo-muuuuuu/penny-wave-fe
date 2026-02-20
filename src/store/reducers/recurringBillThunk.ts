@@ -32,6 +32,39 @@ export const newRecurringBill = createAsyncThunk<void, BillFormValues>(
   },
 );
 
+export const editRecurringBill = createAsyncThunk<void, BillFormValues>(
+  "recurringBill/editRecurringBill",
+  async (values, { rejectWithValue }) => {
+    try {
+      await axiosInstance.put(`/recurring-bills/${values.id}`, values);
+      antdSuccess("Recurring bill updated!");
+    } catch (error) {
+      antdError("Failed to update recurring bill!");
+      console.error("Error updating recurring bill", error);
+      return rejectWithValue(error);
+    }
+  },
+);
+
+export const changeRecurringBillStatus = createAsyncThunk<
+  RecurringBill,
+  { id: number; action: string }
+>(
+  "recurringBill/changeRecurringBillStatus",
+  async ({ id, action }, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.patch(`/recurring-bills/${id}`, { action });
+      antdSuccess("Recurring bill updated!");
+
+      return response.data.recurringBill as RecurringBill;
+    } catch (error) {
+      antdError("Failed to update recurring bill!");
+      console.error("Error updating recurring bill", error);
+      return rejectWithValue(error);
+    }
+  },
+);
+
 export const deleteRecurringBill = createAsyncThunk<number, number>(
   "recurringBill/deleteRecurringBill",
   async (id, { rejectWithValue }) => {
