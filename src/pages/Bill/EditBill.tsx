@@ -43,7 +43,7 @@ const EditBill = () => {
       onDelete={onDelete}
       divider={true}
       initialValues={billSelected}
-      mode="edit"
+      mode="regular"
     />
   );
 };

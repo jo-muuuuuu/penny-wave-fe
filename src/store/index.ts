@@ -7,6 +7,7 @@ import persistedTransactionReducer from "./reducers/transactionSlice";
 import persistedSavingsPlanReducer from "./reducers/savingsPlanSlice";
 import persistedDepositReducer from "./reducers/depositSlicer";
 import persistedBillReducer from "./reducers/billSlice";
+import persistedRecurringBillReducer from "./reducers/recurringBillSlice";
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     savingsPlan: persistedSavingsPlanReducer,
     deposit: persistedDepositReducer,
     bill: persistedBillReducer,
+    recurringBill: persistedRecurringBillReducer,
   },
 
   middleware: (getDefaultMiddleware) =>

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import { newBill } from "../../store/reducers/billThunk";
 import { useAppDispatch } from "../../store/hooks";
-import { BillFormValues } from "../../types/bill";
+import { BillFormValues, OnceOffBill } from "../../types/bill";
 
 const NewBill = () => {
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ const NewBill = () => {
       onFinish={onFinish}
       onCancel={onCancel}
       divider={true}
-      mode="new"
+      mode="regular"
     />
   );
 };

@@ -29,6 +29,14 @@ const DeleteButton = ({ type, name, onDelete }) => {
             This action cannot be undone.
           </p>
         );
+      case "RecurringBill":
+        return (
+          <p>
+            Are you sure to delete Recurring Bill Template: [{name}]?
+            <br />
+            This action cannot be undone.
+          </p>
+        );
       default:
         return "Are you sure to delete this Transaction?";
     }

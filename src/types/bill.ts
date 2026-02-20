@@ -30,7 +30,6 @@ export interface BillFormValues {
   amount: string;
   due_date: Date;
   direct_debit: boolean;
-  recurring: boolean;
   period?: "week" | "fortnight" | "month" | "quarter" | "year";
   category: string;
 }

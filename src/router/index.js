@@ -26,6 +26,10 @@ import BillOverview from "../pages/Bill/BillOverview.tsx";
 import NewBill from "../pages/Bill/NewBill.tsx";
 import EditBill from "../pages/Bill/EditBill.tsx";
 import ViewBill from "../pages/Bill/ViewBill.tsx";
+import RecurringBillOverview from "../pages/RecurringBill/RecurringBillOverview.tsx";
+import NewRecurringBill from "../pages/RecurringBill/NewRecurringBill";
+import EditRecurringBill from "../pages/RecurringBill/EditRecurringBill";
+import ViewRecurringBill from "../pages/RecurringBill/ViewRecurringBill";
 
 const router = createBrowserRouter([
   {
@@ -78,12 +82,21 @@ const router = createBrowserRouter([
           { path: "view/:id", element: <ViewBill /> },
         ],
       },
+      {
+        path: "recurring-bill",
+        children: [
+          { index: true, element: <Navigate to="overview" replace /> },
+          { path: "overview", element: <RecurringBillOverview /> },
+          { path: "new", element: <NewRecurringBill /> },
+          { path: "edit:/id", element: <EditRecurringBill /> },
+          { path: "view/:id", element: <ViewRecurringBill /> },
+        ],
+      },
       { path: "/profile", element: <Profile /> },
     ],
   },
   { path: "/landing", element: <Landing /> },
   { path: "/auth/github/callback", element: <GitHubCallback /> },
-
   { path: "/login", element: <Login /> },
   { path: "/register", element: <Register /> },
   { path: "/forgot-password", element: <ForgotPassword /> },

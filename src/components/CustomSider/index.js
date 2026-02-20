@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Children } from "react";
 import { useNavigate, useLocation } from "react-router";
 import {
   DashboardOutlined,
@@ -37,9 +37,18 @@ const siderItems = [
     label: "Savings Plans",
   },
   {
-    key: "/bill/overview",
     icon: React.createElement(CreditCardOutlined),
     label: "Bills",
+    children: [
+      {
+        key: "/bill/overview",
+        label: "Regular Bills",
+      },
+      {
+        key: "/recurring-bill/overview",
+        label: "Recurring Bills",
+      },
+    ],
   },
   {
     key: "/profile",
@@ -63,6 +72,8 @@ const CustomSider = () => {
       return "/savings-plan/overview";
     } else if (currentPath.startsWith("/bill")) {
       return "/bill/overview";
+    } else if (currentPath.startsWith("/recurring-bill")) {
+      return "/recurring-bill/overview";
     } else if (currentPath === "/profile") {
       return "/profile";
     }

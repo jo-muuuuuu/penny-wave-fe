@@ -16,7 +16,7 @@ import DeleteButton from "../DeleteButton";
 import BillCategoryGrid from "../CategoryGrid/billCategories";
 
 import dayjs from "dayjs";
-import { BillFormValues, OnceOffBill } from "../../types/bill";
+import { BillFormValues, OnceOffBill, RecurringBill } from "../../types/bill";
 import { antdError } from "../../utils/antdMessage";
 
 const { Option } = Select;
@@ -34,8 +34,8 @@ interface BillFormProps {
   onCancel: () => void;
   onDelete?: () => void | undefined;
   divider?: boolean;
-  initialValues?: OnceOffBill | null;
-  mode: "new" | "edit";
+  initialValues?: OnceOffBill | RecurringBill | null;
+  mode: "regular" | "recurring";
 }
 
 const BillForm = ({
@@ -50,7 +50,6 @@ const BillForm = ({
   const [categorySelected, setCategorySelected] = useState<string>("");
 
   const [form] = Form.useForm();
-  const isRecurring = Form.useWatch("recurring", form);
 
   const handleCategorySelect = (name: string) => {
     // console.log("Selected category name:", name);
@@ -67,17 +66,20 @@ const BillForm = ({
   };
 
   useEffect(() => {
-    if (!isRecurring) {
-      form.setFieldsValue({ period: undefined });
-    }
-  }, [isRecurring, form]);
-
-  useEffect(() => {
     if (initialValues) {
-      form.setFieldsValue({
-        ...initialValues,
-        date: initialValues.date ? dayjs(initialValues.date) : undefined,
-      });
+      if ("date" in initialValues) {
+        form.setFieldsValue({
+          ...initialValues,
+          due_date: initialValues.date ? dayjs(initialValues.date) : undefined,
+        });
+      } else if ("start_date" in initialValues) {
+        form.setFieldsValue({
+          ...initialValues,
+          start_date: initialValues.start_date
+            ? dayjs(initialValues.start_date)
+            : undefined,
+        });
+      }
 
       if (initialValues.category) {
         setCategorySelected(initialValues.category);
@@ -128,37 +130,19 @@ const BillForm = ({
         </Form.Item>
 
         <Form.Item
-          label="Due Date"
-          name="date"
+          label={mode === "recurring" ? "Start Date" : "Due Date"}
+          name={mode === "recurring" ? "start_date" : "due_date"}
           rules={[{ required: true, message: "Please enter the due date!" }]}
         >
           <DatePicker format="YYYY-MM-DD" />
         </Form.Item>
 
-        <Form.Item label="Direct Debit" name="direct_debit" valuePropName="checked">
-          <Checkbox> Direct Debit </Checkbox>
-        </Form.Item>
-
-        {mode === "new" && (
+        {mode === "recurring" && (
           <>
-            <Form.Item
-              label="Type"
-              name="recurring"
-              valuePropName="checked"
-              tooltip="If enabled, bills for the next period will be automatically generated on the same day each period."
-            >
-              <Checkbox> Recurring </Checkbox>
-            </Form.Item>
-
             <Form.Item
               label="Period"
               name="period"
-              hidden={!isRecurring}
-              rules={
-                isRecurring
-                  ? [{ required: true, message: "Please select a period!" }]
-                  : []
-              }
+              rules={[{ required: true, message: "Please select a period!" }]}
             >
               <Select placeholder="Select a period">
                 {periodOptions.map((option) => (
@@ -170,6 +154,10 @@ const BillForm = ({
             </Form.Item>
           </>
         )}
+
+        <Form.Item label="Direct Debit" name="direct_debit" valuePropName="checked">
+          <Checkbox> Direct Debit </Checkbox>
+        </Form.Item>
 
         <BillCategoryGrid
           key={categorySelected || "empty"}
