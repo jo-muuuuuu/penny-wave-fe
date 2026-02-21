@@ -16,6 +16,7 @@ import {
 } from "../../store/reducers/recurringBillThunk";
 
 import DeleteButton from "../../components/DeleteButton";
+import BillList from "../../components/BillList";
 
 const ViewRecurringBill = () => {
   const navigate = useNavigate();
@@ -23,6 +24,12 @@ const ViewRecurringBill = () => {
 
   const recurringBillSelected = useAppSelector(
     (state) => state.recurringBill.recurringBillSelected,
+  );
+
+  const generatedBillList = useAppSelector((state) =>
+    state.bill.billList.filter(
+      (bill) => bill.recurring_bill_id === recurringBillSelected?.id,
+    ),
   );
 
   const onCancel = () => {
@@ -156,6 +163,8 @@ const ViewRecurringBill = () => {
       <Divider style={{ color: "#1677ff" }}>
         <BarsOutlined /> Bills Generated from this Template
       </Divider>
+
+      <BillList billList={generatedBillList} />
     </div>
   );
 };

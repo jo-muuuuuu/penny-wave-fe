@@ -35,6 +35,7 @@ interface BillFormProps {
   onDelete?: () => void | undefined;
   divider?: boolean;
   initialValues?: OnceOffBill | RecurringBill | null;
+  selectedDate?: string;
   mode: "regular" | "recurring";
 }
 
@@ -45,6 +46,7 @@ const BillForm = ({
   onDelete,
   divider,
   initialValues,
+  selectedDate,
   mode,
 }: BillFormProps) => {
   const [categorySelected, setCategorySelected] = useState<string>("");
@@ -86,6 +88,14 @@ const BillForm = ({
       }
     }
   }, [initialValues, form]);
+
+  useEffect(() => {
+    if (selectedDate) {
+      form.setFieldsValue({
+        due_date: dayjs(selectedDate),
+      });
+    }
+  }, []);
 
   return (
     <div>

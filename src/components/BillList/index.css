@@ -1,3 +1,7 @@
+.row-pending > td {
+  background-color: rgba(255, 255, 0, 0.1) !important;
+}
+
 .row-paused > td {
   background-color: rgba(255, 0, 0, 0.1) !important;
 }

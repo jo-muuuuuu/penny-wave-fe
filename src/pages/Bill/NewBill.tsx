@@ -1,12 +1,15 @@
 import BillForm from "../../components/BillForm/index";
 import { PlusCircleOutlined } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import { newBill } from "../../store/reducers/billThunk";
 import { useAppDispatch } from "../../store/hooks";
-import { BillFormValues, OnceOffBill } from "../../types/bill";
+import { BillFormValues } from "../../types/bill";
 
 const NewBill = () => {
+  const location = useLocation();
+  const selectedDate = location.state?.date;
+
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -29,6 +32,7 @@ const NewBill = () => {
       onFinish={onFinish}
       onCancel={onCancel}
       divider={true}
+      selectedDate={selectedDate}
       mode="regular"
     />
   );

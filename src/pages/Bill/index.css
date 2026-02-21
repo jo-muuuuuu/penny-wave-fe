@@ -29,6 +29,7 @@
 
 .fc-daygrid-day-frame {
   aspect-ratio: 1 / 1 !important;
+  cursor: pointer;
 }
 
 .fc-daygrid-event {

@@ -5,7 +5,9 @@ import { useNavigate } from "react-router-dom";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import listPlugin from "@fullcalendar/list";
+import interactionPlugin from "@fullcalendar/interaction";
 import type { EventInput } from "@fullcalendar/core";
+import type { DateClickArg } from "@fullcalendar/interaction";
 import "./index.css";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { fetchBills } from "../../store/reducers/billThunk";
@@ -34,6 +36,14 @@ const BillOverview = () => {
     navigate(`/bill/view/${bill.id}`);
   };
 
+  const handleClick = (arg: DateClickArg) => {
+    navigate("/bill/new", {
+      state: {
+        date: arg.dateStr,
+      },
+    });
+  };
+
   useEffect(() => {
     dispatch(fetchBills());
   }, [dispatch]);
@@ -49,7 +59,7 @@ const BillOverview = () => {
 
       <Card className="calendar-card">
         <FullCalendar
-          plugins={[dayGridPlugin, listPlugin]}
+          plugins={[dayGridPlugin, listPlugin, interactionPlugin]}
           initialView="dayGridMonth"
           height="auto"
           expandRows={false}
@@ -74,6 +84,7 @@ const BillOverview = () => {
               </div>
             );
           }}
+          dateClick={handleClick}
         />
       </Card>
     </div>
