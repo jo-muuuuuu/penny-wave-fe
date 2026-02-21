@@ -1,7 +1,12 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Layout, Dropdown, Breadcrumb, Avatar, theme } from "antd";
-import { LogoutOutlined, DownOutlined, UserOutlined } from "@ant-design/icons";
+import {
+  LogoutOutlined,
+  DownOutlined,
+  UserOutlined,
+  DashboardOutlined,
+} from "@ant-design/icons";
 
 import { useSelector, useDispatch } from "react-redux";
 import { persistor } from "../../store";
@@ -104,6 +109,14 @@ const CustomHeader = () => {
   const headerItems = [
     {
       label: (
+        <p onClick={() => navigate("/")}>
+          <DashboardOutlined /> Dashboard
+        </p>
+      ),
+      key: "dashboard",
+    },
+    {
+      label: (
         <p onClick={() => navigate("/profile")}>
           <UserOutlined /> Profile
         </p>
@@ -131,7 +144,7 @@ const CustomHeader = () => {
         <Avatar src={avatarSrc} style={{ marginRight: "1rem" }} />
 
         <Dropdown menu={{ items: headerItems }} trigger={["click"]}>
-          <span className="nickname">
+          <span className="nickname" style={{ cursor: "pointer" }}>
             {/* {nickname} &nbsp; */}
             {nickname ? nickname.toUpperCase() : ""} &nbsp;
             <DownOutlined />

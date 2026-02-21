@@ -142,7 +142,12 @@ const BillForm = ({
         <Form.Item
           label={mode === "recurring" ? "Start Date" : "Due Date"}
           name={mode === "recurring" ? "start_date" : "due_date"}
-          rules={[{ required: true, message: "Please enter the due date!" }]}
+          rules={[
+            {
+              required: true,
+              message: `Please enter the ${mode === "recurring" ? "start date" : "due date"}!`,
+            },
+          ]}
         >
           <DatePicker format="YYYY-MM-DD" />
         </Form.Item>

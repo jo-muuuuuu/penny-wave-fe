@@ -47,7 +47,6 @@ const BillList = ({ billList }: BillListProps) => {
   const onDelete = (bill: OnceOffBill | RecurringBill) => {
     if (isRecurringBill(bill)) {
       dispatch(deleteRecurringBill(bill.id));
-      navigate("/recurring-bill/overview");
     } else {
       dispatch(deleteBill(bill.id));
       navigate("/bill/overview");
@@ -110,7 +109,7 @@ const BillList = ({ billList }: BillListProps) => {
               <DeleteButton
                 type="RecurringBill"
                 name={item.name}
-                onDelete={() => onDelete(item.id)}
+                onDelete={() => onDelete(item)}
               />
             </Space>
           );
